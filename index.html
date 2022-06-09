@@ -21,15 +21,11 @@
   <body>
     <h1>Main Page</h1>
     <div class="container main">
-        <div class="row">
-
-        </div>
+      <div class="row"></div>
     </div>
     <h1>Cart</h1>
     <div class="container cart">
-        <div class="row">
-
-        </div>
+      <div class="row"></div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -52,39 +48,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
     <script>
+      let allBooks = []
       const getBooks = async () => {
-        const response = await fetch(
-          "https://striveschool-api.herokuapp.com/books"
-        );
-        const list = await response.json();
-
-        console.log(list);
-        const grid = document.querySelector('.container.main > .row')
-        //for (let i=0 ; i<list.length ; i++){}
-        list.forEach(book => {
-            
-        
-        const col = document.createElement("div");
-        col.className = "col-sm-6 col-md-4 col-lg-3";
-        col.innerHTML = `
+        try {
+          const response = await fetch(
+            "https://striveschool-api.herokuapp.com/books"
+          );
+          const list = await response.json();
+          allBooks = list
+          console.log(list);
+          const grid = document.querySelector(".container.main > .row");
+          //for (let i=0 ; i<list.length ; i++){}
+          list.forEach((book) => {
+            const col = document.createElement("div");
+            col.className = "col-sm-6 col-md-4 col-lg-3";
+            col.innerHTML = `
         <div class="card" >
             <img class="card-img-top" src="${book.img}" alt="${book.title}" >
             <div class="card-body">
                 <h5 class="card-title">${book.title}</h5>
-                <button type="button" class="btn btn-info">add to cart</button>
-                <button type="button" class="btn btn-secondary">Skip</button>
+                <button type="button" onclick="addToCart(event)" class="btn btn-info" id="${book.asin}">add to cart</button>
+                <button type="button"  class="btn btn-secondary">Skip</button>
             </div>
         </div>
           `;
-          grid.appendChild(col)
-          let btn = document.querySelector('.btn.btn-info')
-          
-        });
-       
+            grid.appendChild(col);
+          });
+        } catch (error) {
+          console.log(error);
+        }
       };
-     
+      const addToCart = (clickEvent) => {
+        let bookId = clickEvent.target.id
+        console.log(bookId)
+        let foundBook = allBooks.filter((currentBook)=>{
+          return currentBook.asin === bookId
+        })[0]
+        console.log(foundBook)
+      }
+
       window.onload = getBooks();
-      
     </script>
   </body>
 </html>
