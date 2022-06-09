@@ -42,13 +42,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
     <script>
-      async function fetchBooks() {
-        const response = await fetch(
-          "https://striveschool-api.herokuapp.com/books"
-        );
-        const body = await response.json();
-        console.log(body);
-    }
+      const getBooks = async () => {
+          const response = await fetch("https://striveschool-api.herokuapp.com/books")
+          const list = await response.json()
+
+          console.log(list)
+      }
+      window.onload = getBooks;
     </script>
   </body>
 </html>
