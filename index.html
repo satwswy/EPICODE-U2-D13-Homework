@@ -19,13 +19,18 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
-    <div class="container">
+    <h1>Main Page</h1>
+    <div class="container main">
         <div class="row">
 
         </div>
     </div>
+    <h1>Cart</h1>
+    <div class="container cart">
+        <div class="row">
 
+        </div>
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -54,7 +59,7 @@
         const list = await response.json();
 
         console.log(list);
-        const grid = document.querySelector('.container > .row')
+        const grid = document.querySelector('.container.main > .row')
         //for (let i=0 ; i<list.length ; i++){}
         list.forEach(book => {
             
@@ -67,11 +72,14 @@
             <div class="card-body">
                 <h5 class="card-title">${book.title}</h5>
                 <button type="button" class="btn btn-info">add to cart</button>
+                <button type="button" class="btn btn-secondary">Skip</button>
             </div>
         </div>
           `;
           grid.appendChild(col)
+          
         });
+        
       };
       window.onload = getBooks;
     </script>
