@@ -48,14 +48,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
     <script>
-      let allBooks = []
+      let allBooks = [];
       const getBooks = async () => {
         try {
           const response = await fetch(
             "https://striveschool-api.herokuapp.com/books"
           );
           const list = await response.json();
-          allBooks = list
+          allBooks = list;
           console.log(list);
           const grid = document.querySelector(".container.main > .row");
           //for (let i=0 ; i<list.length ; i++){}
@@ -79,13 +79,14 @@
         }
       };
       const addToCart = (clickEvent) => {
-        let bookId = clickEvent.target.id
-        console.log(bookId)
-        let foundBook = allBooks.filter((currentBook)=>{
-          return currentBook.asin === bookId
-        })[0]
-        console.log(foundBook)
-      }
+        let bookId = clickEvent.target.id;
+        console.log(bookId);
+        let foundBook = allBooks.filter((currentBook) => {
+          return currentBook.asin === bookId;
+        })[0];
+        console.log(foundBook);
+        
+      };
 
       window.onload = getBooks();
     </script>
